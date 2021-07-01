@@ -31,7 +31,7 @@ class JWTAutorizadorFilter(authenticationManager : AuthenticationManager, val jw
         val token = athorization.substring(7)
         if(jwtUtils.isTokenValido(token)){
             val idString = jwtUtils.getUsuarioId(token)
-            if(idString.isNullOrBlank() && idString.isNullOrEmpty()){
+            if(!idString.isNullOrBlank() && !idString.isNullOrEmpty()){
                 val usuario = Usuario(idString.toLong(), "Usuário Teste", "admin@admin.com", "Admin1234@")
                 return UsernamePasswordAuthenticationToken(usuario, null)
             }
